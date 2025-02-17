@@ -80,7 +80,6 @@ li {
     transition: .3s;
     color: #1fadff;
     background-color: white;
-    padding: 15px 15px;
 }
 
 /* @media (min-width: 1400px) {
@@ -198,12 +197,11 @@ li {
 .header__info-number {
     display: flex;
     justify-content: space-around;
-    padding: 10px 0;
+    padding: 10px 14px;
     align-items: center;
     border: 1px solid;
     background-color: rgba(0, 0, 0, 0.779);
     border-radius: 50px;
-    width: 18%;
     transition: .3s;
 }
 
@@ -230,6 +228,7 @@ li {
     font-size: 20px;
     font-weight: 500;
     transition: .3s;
+    margin-left: 12px;
 }
 
 /* ======header===== */
@@ -414,7 +413,7 @@ li {
     align-items: center;
     background: #1fadff;
     border-radius: 10px;
-    padding: 5px;
+    padding: 12px;
 }
 
 .services__content-card-content {
@@ -427,12 +426,12 @@ li {
     font-size: 18px;
     font-family: 'Geologica';
     font-weight: 500;
-    margin: 15px 0 10px;
+    margin: 15px 0 15px 0;
     color: #333333;
 }
 
 .services__content-card p {
-    font-size: 14px;
+    font-size: 15px;
     color: #777777;
     font-weight: 300;
     font-family: 'Geologica';
@@ -1114,8 +1113,10 @@ li {
 }
 
 .testimonial p {
-    font-size: 1em;
+    font-size: 15px;
     color: #333;
+    font-family: "Geologica", "Geologica Placeholder", sans-serif;
+    margin: 10px 0;
 }
 
 .testimonial-author {
@@ -1129,6 +1130,16 @@ li {
     height: 50px;
     border-radius: 50%;
     margin-right: 15px;
+
+    --border-bottom-width: 2px;
+    --border-color: var(--token-95e624c8-467e-4232-b2c7-c62803cd3aae, rgb(51, 116, 255));
+    --border-left-width: 2px;
+    --border-right-width: 2px;
+    --border-style: solid;
+    --border-top-width: 2px;
+    border-radius: 60px;
+
+    border: var(--border-top-width) var(--border-style) var(--border-color);
 }
 
 .testimonial-author div {
@@ -1138,10 +1149,11 @@ li {
 }
 
 .testimonial-author strong {
-    font-size: 26px;
+    font-size: 18px;
     color: #333;
-    font-weight: 500;
+    font-weight: 600;
     font-family: "Geologica", "Geologica Placeholder", sans-serif;
+    margin-bottom: 5px;
 }
 
 .heading p {
@@ -1440,10 +1452,6 @@ li {
     transition: .3s;
 }
 
-.blue__foot-link {
-    margin-top: 40px;
-}
-
 .blue__foot-link a:hover {
     background: white;
     color: #1fadff;
@@ -1490,12 +1498,11 @@ li {
 }
 
 .contact-icon {
-    width: 70px;
-    height: 70px;
+    width: 65px;
+    height: 65px;
     background: #1fadff;
-    padding: 20px;
+    padding: 17px;
     border-radius: 10px;
-    margin-bottom: 15px;
     margin-right: 20px;
 }
 
@@ -1508,7 +1515,7 @@ li {
 
 .contact-form-section {
     background-color: #17171705;
-    padding: 40px;
+    padding: 60px 40px;
     border-radius: 8px;
 }
 
@@ -1610,11 +1617,10 @@ li {
 .footer-link:hover {
     border-radius: 10px;
     transition: .3s;
-    color: #272727;
+    color: #1fadff;
 }
 
 .footer-logo img {
-    width: 337px;
     height: 75px;
 }
 
@@ -1636,6 +1642,10 @@ li {
 
 .social {
     margin: 0 20px 30px;
+}
+
+.social:hover {
+    opacity: 0.3;
 }
 
 .link-service {
@@ -1774,9 +1784,9 @@ li {
 .service1-icon {
     position: absolute;
     z-index: 3;
-    bottom: 55%;
-    right: 48%;
-    transform: translateX(-160px);
+    left: 47%;
+    top: 35%;
+    transform: translate(-50%, -50%);
     width: 55px;
     height: 55px;
     display: flex;
@@ -1962,12 +1972,12 @@ li {
     font-weight: 600;
     display: flex;
     color: white;
-    height: 400px;
+    max-height: 500px;
+    height: 100%;
     width: 50%;
-    padding-top: 95px;
+    padding-top: 165px;
     text-align: center;
     margin: 0 auto;
-    align-items: center;
     justify-content: center;
 }
 
@@ -2144,7 +2154,6 @@ li {
 }
 
 .ser-text {
-    transform: translateY(-35px) !important;
     display: flex;
     justify-content: center;
     font-size: 18px;
@@ -2152,6 +2161,7 @@ li {
     font-weight: 300;
     font-family: "Geologica", "Geologica Placeholder", sans-serif;
     text-align: center;
+    padding-top: 20px;
 }
 
 .projects__card-date {
@@ -2227,11 +2237,11 @@ li {
 }
 
 .delivery__card-text {
-    font-family: "Geologica", "Geologica Placeholder", sans-serif;
+    font-family: "Geologica", sans-serif;
     font-size: 14px;
-    font-weight: 300;
-    width: 80%;
+    width: 90%;
     color: #444444;
+    line-height: 1.6;
 }
 
 
@@ -2324,10 +2334,6 @@ li {
         justify-content: center;
     }
 
-    .header__info-number {
-        width: 22%;
-    }
-
     .partners__content-title {
         font-size: 38px !important;
     }
@@ -2340,6 +2346,14 @@ li {
         margin: 0 !important;
     }
 
+    .ser-title {
+        font-size: 48px;
+        width: 80%;
+    }
+
+    .service1-icon {
+        top: 40%;
+    }
 }
 
 @media (max-width: 1190px) {
@@ -2417,6 +2431,9 @@ li {
         transform: rotate(-45deg) translate(5px, -5px);
     }
 
+    .ser-title {
+        padding-top: 220px;
+    }
 }
 
 @media (max-width: 1027px) {
@@ -2557,11 +2574,6 @@ li {
 
     .header {
         height: 610px;
-    }
-
-    .header__info-number {
-        width: 100%;
-        max-width: 230px;
     }
 
     .logo img {
@@ -2775,7 +2787,7 @@ li {
     .history__content {
         flex-wrap: wrap;
         flex-direction: column-reverse;
-        padding: 0 50px;
+        padding: 0;
     }
 
     .history__content-left {
@@ -2912,7 +2924,28 @@ li {
         justify-content: space-between;
     }
 
+    .ser-title {
+        font-size: 32px;
+    }
 
+    .services-section {
+        flex-wrap: wrap;
+        flex-direction: column-reverse;
+        margin: 80px 0 50px 0 !important;
+
+    }
+
+    .services-left {
+        margin: 0 !important;
+    }
+
+    .item-text {
+        text-align: center;
+    }
+
+    .testimonial {
+        flex: 0 0 35%;
+    }
 }
 
 @media (max-width: 601px) {
@@ -2930,7 +2963,7 @@ li {
     }
 
     .list {
-        padding: 15px 0 10px 0;
+        padding: 20px 0 10px 0;
         gap: 15px;
     }
 
@@ -3011,7 +3044,8 @@ li {
     }
 
     .footer-logo img {
-        padding: 10px 45px;
+        padding: 10px;
+        height: 55px;
     }
 
     .contact-form-section2 {
@@ -3027,7 +3061,7 @@ li {
     }
 
     .burger-active .list {
-        width: 60%;
+        width: 75%;
     }
 
     .header-about {
@@ -3081,6 +3115,21 @@ li {
 
     .delivery__cards {
         height: 100%;
+    }
+
+    .ser-title {
+        width: 90%;
+        padding-top: 160px;
+        font-size: 28px;
+    }
+
+    .service1-icon {
+        left: 44%;
+        top: 38%;
+    }
+
+    .testimonial {
+        flex: 0 0 80%;
     }
 }
 
@@ -3274,14 +3323,13 @@ li {
 
 .services-section {
     display: flex;
-    margin: 120px auto;
+    margin: 130px auto;
     max-width: 1200px;
-    padding: 0 20px;
 }
 
 .services-left {
     flex: 0 0 420px;
-    margin-right: 25px;
+    margin-right: 35px;
     top: 20px;
 }
 
@@ -3299,7 +3347,7 @@ li {
 
 .service-item {
     margin-bottom: 14px;
-    border-radius: 8px;
+    border-radius: 12px;
     background-color: rgb(240, 242, 250);
     transition: background-color 0.2s ease;
     overflow: hidden;
@@ -3317,14 +3365,26 @@ li {
 }
 
 .item-text {
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 300;
     color: rgb(68, 68, 68);
     font-family: "Geologica", "Geologica Placeholder", sans-serif;
 }
 
 .service-item:hover {
-    background-color: #e5f2fd;
+    background-color: #1fadff;
+}
+
+.service-item:hover .item-text {
+    color: white;
+}
+
+.service-item:hover img {
+    filter: brightness(100);
+}
+
+.service-item:hover svg {
+    fill: white;
 }
 
 .icon {
@@ -3334,14 +3394,13 @@ li {
 
 .service-item a img {
     display: inline-flex;
-    margin-right: 10px;
-    width: 30px;
+    margin-right: 12px;
+    width: 25px;
     color: #000;
 }
 
 .arrow {
-    margin-left: 8px;
-    font-size: 26px;
+    margin-left: 10px;
     color: #666;
 }
 
