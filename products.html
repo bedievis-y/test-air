@@ -5,344 +5,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="style/popup-basket.css">
+    <link rel="stylesheet" href="style/shop-style.css">
     <link rel="icon" href="images/icon.svg">
     <title>Airtechnic</title>
     <style>
-        /* Основные стили контейнера */
-        .shop {
-            display: flex;
-            gap: 20px;
-            padding: 70px 0;
-        }
-
-        /* Боковая панель */
-        .shop__sidebar {
-            width: 250px;
-            background: #fff;
-            border-radius: 10px;
-        }
-
-        .shop__title {
-            color: #1fadff;
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-            font-family: 'Geologica';
-        }
-
-        /* Категории */
-        .shop__category-list {
-            list-style: none;
-            padding: 0;
-        }
-
-        .shop__category-item {
-            padding: 10px;
-            cursor: pointer;
-            color: #333;
-            transition: background 0.3s, color 0.3s;
-        }
-
-        .shop__category-item:hover {
+        .cart-notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
             background: #1fadff;
             color: white;
+            padding: 10px 20px;
             border-radius: 5px;
-        }
-
-        .shop__content {
-            flex: 1;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-
-        .shop__product-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: rgba(0, 0, 0, 0.5);
-            opacity: 0;
-            transition: opacity 0.3s ease-in-out;
-        }
-
-        .shop__product-img-wrapper:hover .shop__product-overlay {
-            opacity: 1;
-        }
-
-        .shop__product-icon {
-            width: 30px;
-            height: 30px;
-        }
-
-        /* Описание товара */
-        .shop__product-body {
-            margin-top: 10px;
-        }
-
-        /* Карточка товара */
-        .shop__product-card {
-            width: 230px;
-            background: white;
-            padding: 15px;
-            border-radius: 10px;
-            text-align: center;
-            border: 1px #dedede solid;
-            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            min-height: 350px;
-            align-items: start;
-        }
-
-        /* Изображение */
-        .shop__product-img-wrapper {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: #f8f8f8;
-            padding: 0;
-            border-radius: 10px;
-            height: 150px;
-            width: 100%;
-        }
-
-        .shop__product-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 10px;
-        }
-
-        /* Описание товара */
-        .shop__product-category {
-            font-size: 0.9rem;
-            color: #1fadff;
-            font-weight: 500;
-            font-family: 'Geologica';
-        }
-
-        .shop__product-title {
-            font-size: 1rem;
-            color: #333;
-            font-weight: 600;
-            margin: 5px 0;
-            flex-grow: 1;
-            font-family: 'Geologica';
-        }
-
-        .shop__product-price {
-            font-size: 1.2rem;
-            color: #1fadff;
-            font-weight: bold;
-            font-family: 'Geologica';
-        }
-
-        /* Кнопка */
-        .shop__product-button {
-            border: 1px solid #1fadff;
-            background: white;
-            color: #1fadff;
-            font-size: 0.9rem;
-            padding: 8px 12px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: 0.3s;
-            margin-top: auto;
-            font-family: 'Geologica';
-        }
-
-        .shop__product-button:hover {
-            background: #1fadff;
-            color: white;
-        }
-
-        /* Затемнённый фон */
-        .popup-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.6);
-            display: none;
-            z-index: 9999;
-        }
-
-        /* Основной стиль попапа */
-        .popup {
-            position: fixed;
-            top: 10%;
-            left: 10%;
-            width: 80%;
-            height: 80%;
-            background: rgba(255, 255, 255, 0.95);
+            font-size: 16px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 10000;
-            transform: scale(0.8);
+            z-index: 1000;
+            transition: opacity 0.3s ease-in-out;
+            font-family: 'Geologica';
+        }
+
+        .cart-notification.fade-out {
             opacity: 0;
-            transition: opacity 0.3s ease, transform 0.3s ease;
-        }
-
-        /* Активация попапа */
-        .popup.active {
-            display: flex;
-            transform: scale(1);
-            opacity: 1;
-        }
-
-        .popup-overlay.active {
-            display: block;
-        }
-
-        /* Контент попапа */
-        .popup__content {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            width: 90%;
-            height: 90%;
-            overflow-y: auto;
-            position: relative;
-        }
-
-        /* Кнопка закрытия */
-        .popup__close {
-            position: absolute;
-            font-family: 'Geologica';
-
-            top: 10px;
-            right: 10px;
-            font-size: 24px;
-            cursor: pointer;
-            background: none;
-            border: none;
-        }
-
-        /* Заголовок */
-        .popup__title {
-            text-align: center;
-            font-size: 22px;
-            margin-bottom: 20px;
-        }
-
-        /* Таблица товаров */
-        .popup__table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
-        }
-
-        .popup__table th,
-        .popup__table td {
-            padding: 10px;
-            border: 1px solid #ddd;
-            text-align: center;
-        }
-
-        .popup__table th {
-            background: #1fadff;
-            color: white;
-        }
-
-        .popup__table td img {
-            max-width: 50px;
-            height: auto;
-            margin-right: 10px;
-            vertical-align: middle;
-        }
-
-        /* Поля ввода количества */
-        .popup__table input {
-            width: 50px;
-            text-align: center;
-            padding: 5px;
-        }
-
-        /* Секция действий */
-        .popup__actions {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .popup__coupon-input {
-            padding: 8px;
-            flex-grow: 1;
-            margin-right: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-family: 'Geologica';
-
-        }
-
-        .popup__coupon {
-            background: #1fadff;
-            color: white;
-            padding: 10px;
-            border: none;
-            cursor: pointer;
-        }
-
-        .popup__update {
-            background: #1fadff;
-            color: white;
-            padding: 10px;
-            border: none;
-            cursor: pointer;
-        }
-
-        /* Итоговая сумма */
-        .popup__total {
-            font-family: 'Geologica';
-            font-weight: bold;
-            text-align: right;
-            font-size: 18px;
-        }
-
-        .popup-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 999;
-        }
-
-        @media (max-width: 768px) {
-            .shop__content {
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 15px;
-            }
-
-            .shop__product-card {
-                max-width: 180px;
-                min-height: 320px;
-            }
-
-            .shop__product-img-wrapper {
-                height: 120px;
-            }
-
-            .shop__product-title {
-                font-size: 0.9rem;
-            }
-
-            .shop__product-price {
-                font-size: 1rem;
-            }
         }
     </style>
 
@@ -523,42 +207,42 @@
     <div class="popup" id="popup">
         <div class="popup__content">
             <button class="popup__close" id="closePopup">&times;</button>
-            <h2 class="popup__title">Корзина</h2>
+            <h2 class="popup__title">Ваша корзина</h2>
 
-            <table class="popup__table">
-                <thead>
-                    <tr>
-                        <th>Продукт</th>
-                        <th>Цена</th>
-                        <th>Количество</th>
-                        <th>Итого</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><img src="img1.jpg" alt="Duty Metal Bender"> Duty Metal Bender</td>
-                        <td>£3,500.00</td>
-                        <td><input type="number" value="1" min="1"></td>
-                        <td>£3,500.00</td>
-                    </tr>
-                    <tr>
-                        <td><img src="img2.jpg" alt="Bossing Dead Blow Mallet Set"> Bossing Dead Blow Mallet Set</td>
-                        <td>£23,000.00</td>
-                        <td><input type="number" value="1" min="1"></td>
-                        <td>£23,000.00</td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="popup__cart">
+                <div class="popup__items-container">
+                    <table class="popup__table">
+                        <thead>
+                            <tr>
+                                <th class="th--no-scroll">Продукты</th>
+                                <th>Название</th>
+                                <th>Количество</th>
+                                <th>Цена</th>
+                                <th>Удалить</th>
+                            </tr>
+                        </thead>
+                        <tbody id="cartItems">
+                        </tbody>
+                    </table>
+                </div>
 
-            <div class="popup__actions">
-                <input type="text" class="popup__coupon-input" placeholder="Coupon code">
-                <button class="popup__coupon">Apply coupon</button>
-                <button class="popup__update">Update cart</button>
+                <div class="popup__summary">
+                    <h3>Общая сумма</h3>
+                    <p>Продуктов <span id="totalProducts">0</span></p>
+                    <div class="popup__total-box">
+                        <span>Общая сумма</span>
+                        <span id="totalPrice">0€</span>
+                    </div>
+                    <button class="popup__checkout">Отправить заявку</button>
+                </div>
             </div>
-
-            <div class="popup__total">Итого: £26,500.00</div>
         </div>
     </div>
+
+    <button class="cart-button" id="cartButton">
+        <img src="images/shopping-card.svg" alt="Корзина" class="cart-icon">
+        <span class="cart-count" id="cartCount">0</span>
+    </button>
 
     <div id="popupOverlay" class="popup-overlay"></div>
 
@@ -583,11 +267,22 @@
             categoriesContainer.innerHTML = "";
 
             const querySnapshot = await getDocs(collection(db, "products"));
-            const categories = new Set(); // Используем Set, чтобы не было дубликатов
+            const categories = new Set();
 
             querySnapshot.forEach((doc) => {
                 categories.add(doc.data().category);
             });
+
+            const allCategoryItem = document.createElement("li");
+            allCategoryItem.className = "shop__category-item active";
+            allCategoryItem.textContent = "Все товары";
+
+            allCategoryItem.addEventListener("click", () => {
+                setActiveCategory(allCategoryItem);
+                loadProducts();
+            });
+
+            categoriesContainer.appendChild(allCategoryItem);
 
             categories.forEach((category) => {
                 const categoryItem = document.createElement("li");
@@ -595,17 +290,23 @@
                 categoryItem.textContent = category;
 
                 categoryItem.addEventListener("click", () => {
-                    document.querySelectorAll(".shop__category-item").forEach((el) => el.classList.remove("active"));
-                    categoryItem.classList.add("active");
+                    setActiveCategory(categoryItem);
                     loadProducts(category);
                 });
 
                 categoriesContainer.appendChild(categoryItem);
             });
 
-            // Загрузка всех товаров по умолчанию
             loadProducts();
         }
+
+        function setActiveCategory(selectedItem) {
+            document.querySelectorAll(".shop__category-item").forEach((el) => {
+                el.classList.remove("active");
+            });
+            selectedItem.classList.add("active");
+        }
+
 
         async function loadProducts(selectedCategory = null) {
             const productsContainer = document.querySelector("#product-list");
@@ -616,7 +317,7 @@
             querySnapshot.forEach((doc) => {
                 const product = doc.data();
 
-                if (selectedCategory && product.category !== selectedCategory) return; // Фильтр по категории
+                if (selectedCategory && product.category !== selectedCategory) return;
 
                 const productCard = document.createElement("div");
                 productCard.className = "shop__product-card";
@@ -627,7 +328,7 @@
             <span class="shop__product-category">${product.category}</span>
             <h3 class="shop__product-title">${product.name}</h3>
             <p class="shop__product-price">${product.price} сум</p>
-            <button class="shop__product-button" id="openPopup">В корзину</button>
+            <button class="shop__product-button">Добавить в корзину</button>
         `;
 
                 productsContainer.appendChild(productCard);
@@ -636,22 +337,68 @@
 
         document.addEventListener("DOMContentLoaded", async () => {
             await loadCategories();
-        });
 
-        document.addEventListener("click", function (event) {
-            if (event.target && event.target.id === "openPopup") {
-                document.getElementById("popup").style.display = "flex";
-                document.getElementById("popupOverlay").style.display = "block";
+            const cartButton = document.getElementById("cartButton");
+            const cartCount = document.getElementById("cartCount");
+
+            function updateCartCount() {
+                let cart = JSON.parse(localStorage.getItem("cart")) || [];
+                let totalCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+                cartCount.textContent = totalCount;
+                cartCount.style.display = totalCount > 0 ? "flex" : "none";
             }
-        });
 
-        document.getElementById("closePopup").addEventListener("click", function () {
-            document.getElementById("popup").style.display = "none";
-            document.getElementById("popupOverlay").style.display = "none";
-        });
+            document.addEventListener("click", function (event) {
+                if (event.target && event.target.classList.contains("shop__product-button")) {
+                    const productCard = event.target.closest(".shop__product-card");
 
+                    const product = {
+                        name: productCard.querySelector(".shop__product-title").textContent,
+                        price: productCard.querySelector(".shop__product-price").textContent.replace(" сум", "").trim(),
+                        imageUrl: productCard.querySelector(".shop__product-img").src,
+                        category: productCard.querySelector(".shop__product-category").textContent,
+                        quantity: 1,
+                    };
+
+                    addToCart(product);
+                }
+            });
+
+            function addToCart(product) {
+                let cart = JSON.parse(localStorage.getItem("cart")) || [];
+                const existingProduct = cart.find(item => item.name === product.name);
+
+                if (existingProduct) {
+                    existingProduct.quantity += 1;
+                } else {
+                    cart.push(product);
+                }
+
+                localStorage.setItem("cart", JSON.stringify(cart));
+                updateCartCount();
+                showNotification("Товар добавлен в корзину!");
+            }
+
+            // Функция уведомления
+            function showNotification(message) {
+                const notification = document.createElement("div");
+                notification.className = "cart-notification";
+                notification.textContent = message;
+
+                document.body.appendChild(notification);
+
+                setTimeout(() => {
+                    notification.classList.add("fade-out");
+                    setTimeout(() => notification.remove(), 500);
+                }, 2000);
+            }
+
+            updateCartCount();
+
+        });
     </script>
 
+    <script src="js/popup-basket.js"></script>
     <script src="js/script.js"></script>
 </body>
 

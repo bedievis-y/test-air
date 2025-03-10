@@ -1506,6 +1506,10 @@ li {
     margin-right: 20px;
 }
 
+.contact-icon--for-contacts-screen {
+    margin: 0 0 20px 0;
+}
+
 .contact-text {
     font-size: 16px;
     font-weight: 400;
@@ -2244,16 +2248,54 @@ li {
     line-height: 1.6;
 }
 
+.cart-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #1fadff;
+    border: none;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+}
+
+.cart-button:hover {
+    background: #0d8be0;
+}
+
+.cart-count {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: red;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+}
 
 
-
-
-
+.cart-button .cart-icon {
+    width: 30px;
+    height: 30px;
+    filter: grayscale(100%) brightness(1000%);
+}
 
 /* ======media====== */
 /* Мобильные устройства (до 768px) */
-
-/* Мобильные стили */
 
 .burger-menu {
     display: none;
