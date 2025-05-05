@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manage Articles</title>
+    <title>Product Management</title>
     <script type="module">
         if (localStorage.getItem('authenticated') !== 'true') {
             window.location.href = 'login.html';
@@ -27,33 +27,131 @@
         const db = getFirestore(app);
         const storage = getStorage(app);
 
-        async function displayArticles() {
-            const articlesContainer = document.getElementById('articles');
-            articlesContainer.innerHTML = '';
+        const categories = {
+            "Screens": [
+                "Lineer Mechanical Screen",
+                "Perforated Plate Screen",
+                "Rotary Drum Screen",
+                "Basket Screen",
+                "Manual Screen"
+            ],
+            "Compacting and Washing Equipments": [
+                "Screening Press",
+                "Grit Classifier",
+                "Grit Classifier Washing"
+            ],
+            "Penstocks And Valves": [
+                "Penstocks",
+                "Telescopic Valve",
+                "Stop Log"
+            ],
+            "Scrapers": [
+                "Radial Bridge Scrapers",
+                "Longitidional Bridge Scrapers",
+                "PicketFence Thickening Bridge"
+            ],
+            "Conveyors": [
+                "Screw Conveyor",
+                "Belt Conveyor"
+            ],
+            "Agitators": [
+                "High Speed Turbine Type",
+                "SlowSpeed Turbine Type",
+                "Surface Aerator"
+            ],
+            "Filters": [
+                "Disc Filter",
+                "Drum Screen"
+            ],
+            "Lifting Device for Mixers and Small Pumps": [
+                "Manual Lifting Device"
+            ],
+            "Package Type Units": [
+                "Compact Pre Treatment Unit",
+                "Automatic Polyelectrolyte Preparation Unit"
+            ],
+            "Other Manufacturing Items": [
+                "Galvanized Mesh Gratings",
+                "SurgeVessel Fabrication",
+                "Stainless Steel Handrail Fabrication",
+                "Stainless Steel Tank Fabrication"
+            ]
+        };
 
-            const querySnapshot = await getDocs(collection(db, "articles"));
+        function updateSubcategories() {
+            const categorySelect = document.getElementById('category');
+            const subcategorySelect = document.getElementById('subcategory');
+            const selectedCategory = categorySelect.value;
+
+            subcategorySelect.innerHTML = '';
+
+            if (selectedCategory) {
+                const subcategories = categories[selectedCategory];
+                subcategories.forEach(subcategory => {
+                    const option = document.createElement('option');
+                    option.value = subcategory;
+                    option.text = subcategory;
+                    subcategorySelect.appendChild(option);
+                });
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const categorySelect = document.getElementById('category');
+            categorySelect.addEventListener('change', updateSubcategories);
+        });
+
+        async function displayProducts() {
+            const productsContainer = document.getElementById('products');
+            productsContainer.innerHTML = '';
+
+            const querySnapshot = await getDocs(collection(db, "products"));
+            const products = [];
             querySnapshot.forEach((doc) => {
-                const article = doc.data();
-                const articleDiv = document.createElement('div');
-                articleDiv.className = 'article';
-                articleDiv.innerHTML = `
-                    <div class="article-content">
-                        <h2>(RU) ${article.titleRu}</h2>
-                        <h2>(UZ) ${article.titleUz}</h2>
-                        <h2>(EN) ${article.titleEn}</h2>
-                        <p>(RU) ${article.descriptionRu}</p>
-                        <p>(UZ) ${article.descriptionUz}</p>
-                        <p>(EN) ${article.descriptionEn}</p>
-                        <p><strong>Publication Date:</strong> ${article.publishDate}</p>
-                    </div>
-                    <img src="${article.imageUrl}" alt="${article.title}" class="article-img"><br>
-                    <button class="edit-button" onclick="editArticle('${doc.id}', '${article.titleRu}','${article.titleUz}','${article.titleEn}', '${article.descriptionRu}','${article.descriptionUz}','${article.descriptionEn}', '${article.imageUrl}', '${article.publishDate}')">Edit</button>
-                    <button class="delete-button" onclick="deleteArticle('${doc.id}')">Delete</button>
-                `;
-                articlesContainer.appendChild(articleDiv);
+                const product = doc.data();
+                products.push({ id: doc.id, ...product });
             });
 
-            document.querySelectorAll('.article-img').forEach(img => {
+            products.sort((a, b) => a.category.localeCompare(b.category));
+
+            let currentCategory = '';
+            let categoryProductsContainer = null;
+
+            products.forEach((product) => {
+                if (product.category !== currentCategory) {
+                    const categoryHeader = document.createElement('h2');
+                    categoryHeader.innerText = product.category;
+                    categoryHeader.className = 'category-header';
+                    productsContainer.appendChild(categoryHeader);
+
+                    categoryProductsContainer = document.createElement('div');
+                    categoryProductsContainer.className = 'products-row';
+                    productsContainer.appendChild(categoryProductsContainer);
+
+                    currentCategory = product.category;
+                }
+
+                const productDiv = document.createElement('div');
+                productDiv.className = 'product';
+                productDiv.innerHTML = `
+                    <div class="product-content">
+                        <h3>(RU) ${product.nameRu}</h3>
+                        <h3>(UZ) ${product.nameUz}</h3>
+                        <h3>(EN) ${product.nameEn}</h3>
+                        <p>(RU) ${product.descriptionRu}</p>
+                        <p>(UZ) ${product.descriptionUz}</p>
+                        <p>(EN) ${product.descriptionEn}</p>
+                        <p><strong>Category:</strong> ${product.category}</p>
+                        <p><strong>Subcategory:</strong> ${product.subcategory}</p>
+                    </div>
+                    <img src="${product.imageUrl}" alt="${product.name}" class="product-img"><br>
+                    <button class="edit-button" onclick="editProduct('${product.id}', '${product.nameRu}','${product.nameUz}','${product.nameEn}', '${product.descriptionRu}','${product.descriptionUz}','${product.descriptionEn}', '${product.imageUrl}', '${product.category}', '${product.subcategory}')">Edit</button>
+                    <button class="delete-button" onclick="deleteProduct('${product.id}')">Delete</button>
+                `;
+                categoryProductsContainer.appendChild(productDiv);
+            });
+
+            document.querySelectorAll('.product-img').forEach(img => {
                 img.addEventListener('click', () => {
                     showImageFullscreen(img.src);
                 });
@@ -70,19 +168,20 @@
             document.getElementById('overlay').style.display = 'none';
         }
 
-        document.getElementById('articleForm').addEventListener('submit', async function (e) {
+        document.getElementById('productForm').addEventListener('submit', async function (e) {
             e.preventDefault();
 
-            const titleRu = document.getElementById('titleRu').value;
-            const titleUz = document.getElementById('titleUz').value;
-            const titleEn = document.getElementById('titleEn').value;
+            const nameRu = document.getElementById('nameRu').value;
+            const nameUz = document.getElementById('nameUz').value;
+            const nameEn = document.getElementById('nameEn').value;
             const descriptionRu = document.getElementById('descriptionRu').value;
             const descriptionUz = document.getElementById('descriptionUz').value;
             const descriptionEn = document.getElementById('descriptionEn').value;
+            const category = document.getElementById('category').value;
+            const subcategory = document.getElementById('subcategory').value;
             const imageFile = document.getElementById('image').files[0];
-            const publishDate = document.getElementById('publishDate').value;
 
-            if (!imageFile || !publishDate) return;
+            if (!category || !subcategory || !imageFile) return;
 
             showLoading();
 
@@ -98,24 +197,25 @@
                 },
                 () => {
                     getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
-                        await addDoc(collection(db, "articles"), {
-                            titleRu: titleRu,
-                            titleUz: titleUz,
-                            titleEn: titleEn,
+                        await addDoc(collection(db, "products"), {
+                            nameRu: nameRu,
+                            nameUz: nameUz,
+                            nameEn: nameEn,
                             descriptionRu: descriptionRu,
                             descriptionUz: descriptionUz,
                             descriptionEn: descriptionEn,
-                            imageUrl: downloadURL,
-                            publishDate: publishDate
+                            category: category,
+                            subcategory: subcategory,
+                            imageUrl: downloadURL
                         });
-                        document.getElementById('articleForm').reset();
+                        document.getElementById('productForm').reset();
                         document.getElementById('saveButton').style.display = 'inline-block';
                         const updateButton = document.querySelector('.update-button');
                         if (updateButton) updateButton.remove();
                         const cancelButton = document.querySelector('.cancel-button');
                         if (cancelButton) cancelButton.remove();
                         hideLoading();
-                        displayArticles();
+                        displayProducts();
                     }).catch((error) => {
                         console.error('Error adding document:', error);
                         hideLoading();
@@ -124,15 +224,17 @@
             );
         });
 
-        window.editArticle = async function (id, titleRu, titleUz, titleEn, descriptionRu, descriptionUz, descriptionEn, imageUrl, publishDate) {
-            document.getElementById('titleRu').value = titleRu;
-            document.getElementById('titleUz').value = titleUz;
-            document.getElementById('titleEn').value = titleEn;
+        window.editProduct = async function (id, nameRu, nameUz, nameEn, descriptionRu, descriptionUz, descriptionEn, imageUrl, category, subcategory) {
+            document.getElementById('nameRu').value = nameRu;
+            document.getElementById('nameUz').value = nameUz;
+            document.getElementById('nameEn').value = nameEn;
             document.getElementById('descriptionRu').value = descriptionRu;
             document.getElementById('descriptionUz').value = descriptionUz;
             document.getElementById('descriptionEn').value = descriptionEn;
             document.getElementById('image').value = '';
-            document.getElementById('publishDate').value = publishDate;
+            document.getElementById('category').value = category;
+            updateSubcategories();
+            document.getElementById('subcategory').value = subcategory;
 
             document.getElementById('saveButton').style.display = 'none';
 
@@ -142,20 +244,21 @@
             }
 
             const updateButton = document.createElement('button');
-            updateButton.innerText = 'Update Article';
+            updateButton.innerText = 'Update Product';
             updateButton.className = 'update-button';
             updateButton.onclick = async function (e) {
                 e.preventDefault();
-                const newTitleRu = document.getElementById('titleRu').value;
-                const newTitleUz = document.getElementById('titleUz').value;
-                const newTitleEn = document.getElementById('titleEn').value;
+                const newNameRu = document.getElementById('nameRu').value;
+                const newNameUz = document.getElementById('nameUz').value;
+                const newNameEn = document.getElementById('nameEn').value;
                 const newDescriptionRu = document.getElementById('descriptionRu').value;
                 const newDescriptionUz = document.getElementById('descriptionUz').value;
                 const newDescriptionEn = document.getElementById('descriptionEn').value;
+                const newCategory = document.getElementById('category').value;
+                const newSubcategory = document.getElementById('subcategory').value;
                 const newImageFile = document.getElementById('image').files[0];
-                const newPublishDate = document.getElementById('publishDate').value;
 
-                if (!newPublishDate) return;
+                if (!newCategory || !newSubcategory) return;
 
                 showLoading();
 
@@ -172,48 +275,50 @@
                         },
                         async () => {
                             const newDownloadURL = await getDownloadURL(newUploadTask.snapshot.ref);
-                            const articleDocRef = doc(db, "articles", id);
-                            await updateDoc(articleDocRef, {
-                                titleRu: newTitleRu,
-                                titleUz: newTitleUz,
-                                titleEn: newTitleEn,
+                            const productDocRef = doc(db, "products", id);
+                            await updateDoc(productDocRef, {
+                                nameRu: newNameRu,
+                                nameUz: newNameUz,
+                                nameEn: newNameEn,
                                 descriptionRu: newDescriptionRu,
                                 descriptionUz: newDescriptionUz,
                                 descriptionEn: newDescriptionEn,
-                                imageUrl: newDownloadURL,
-                                publishDate: newPublishDate
+                                category: newCategory,
+                                subcategory: newSubcategory,
+                                imageUrl: newDownloadURL
                             });
-                            document.getElementById('articleForm').reset();
+                            document.getElementById('productForm').reset();
                             updateButton.remove();
                             const cancelButton = document.querySelector('.cancel-button');
                             if (cancelButton) cancelButton.remove();
                             document.getElementById('saveButton').style.display = 'inline-block';
                             hideLoading();
-                            displayArticles();
+                            displayProducts();
                         }
                     );
                 } else {
-                    const articleDocRef = doc(db, "articles", id);
-                    await updateDoc(articleDocRef, {
-                        titleRu: newTitleRu,
-                        titleUz: newTitleUz,
-                        titleEn: newTitleEn,
+                    const productDocRef = doc(db, "products", id);
+                    await updateDoc(productDocRef, {
+                        nameRu: newNameRu,
+                        nameUz: newNameUz,
+                        nameEn: newNameEn,
                         descriptionRu: newDescriptionRu,
                         descriptionUz: newDescriptionUz,
                         descriptionEn: newDescriptionEn,
-                        publishDate: newPublishDate
+                        category: newCategory,
+                        subcategory: newSubcategory,
                     });
-                    document.getElementById('articleForm').reset();
+                    document.getElementById('productForm').reset();
                     updateButton.remove();
                     const cancelButton = document.querySelector('.cancel-button');
                     if (cancelButton) cancelButton.remove();
                     document.getElementById('saveButton').style.display = 'inline-block';
                     hideLoading();
-                    displayArticles();
+                    displayProducts();
                 }
             };
 
-            document.getElementById('articleForm').appendChild(updateButton);
+            document.getElementById('productForm').appendChild(updateButton);
 
             const existingCancelButton = document.querySelector('.cancel-button');
             if (existingCancelButton) {
@@ -225,21 +330,21 @@
             cancelButton.className = 'cancel-button';
             cancelButton.onclick = function (e) {
                 e.preventDefault();
-                document.getElementById('articleForm').reset();
+                document.getElementById('productForm').reset();
                 updateButton.remove();
                 cancelButton.remove();
                 document.getElementById('saveButton').style.display = 'inline-block';
             };
 
-            document.getElementById('articleForm').appendChild(cancelButton);
+            document.getElementById('productForm').appendChild(cancelButton);
         };
 
-        window.deleteArticle = async function (id) {
+        window.deleteProduct = async function (id) {
             showLoading();
-            const articleDocRef = doc(db, "articles", id);
-            await deleteDoc(articleDocRef);
+            const productDocRef = doc(db, "products", id);
+            await deleteDoc(productDocRef);
             hideLoading();
-            displayArticles();
+            displayProducts();
         };
 
         function showImageFullscreen(src) {
@@ -261,7 +366,7 @@
             }
         }
 
-        displayArticles();
+        displayProducts();
     </script>
     <style>
         body {
@@ -299,7 +404,7 @@
         input[type="text"],
         textarea,
         input[type="file"],
-        input[type="date"] {
+        select {
             width: calc(100% - 16px);
             padding: 8px;
             margin-bottom: 10px;
@@ -357,43 +462,55 @@
             background-color: #c82333;
         }
 
-        .articles-container {
+        .category-header {
+            width: 100%;
+            background-color: #007BFF;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .products-container {
             display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
+            flex-direction: column;
+            align-items: center;
             gap: 20px;
             width: 100%;
-            max-width: 1920px;
-            overflow-x: auto;
-            padding-bottom: 20px;
+            max-width: 1200px;
         }
 
-        .articles-container h2{
-            font-size: 21px;
+        .products-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            width: 100%;
+            justify-content: center;
         }
 
-        .article {
+        .product {
             background: #fff;
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            flex: 1 1 calc(33.333% - 40px);
-            box-sizing: border-box;
-            min-width: 300px;
-            max-width: 600px;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .article-content {
-            flex: 1;
-            min-height: 150px;
-        }
-
-        .article img {
+            align-items: center;
             width: 100%;
-            height: 300px;
+            max-width: 300px;
+            box-sizing: border-box;
+        }
+
+        .product-content {
+            flex: 1;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .product img {
+            width: 100%;
+            height: 200px;
             object-fit: cover;
             border-radius: 8px;
             cursor: pointer;
@@ -408,18 +525,6 @@
             height: 100%;
             background-color: rgba(0, 0, 0, 0.5);
             z-index: 1000;
-        }
-
-        @media (max-width: 1200px) {
-            .article {
-                flex: 1 1 calc(50% - 40px);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .article {
-                flex: 1 1 100%;
-            }
         }
 
         .fullscreen-container {
@@ -501,18 +606,20 @@
 </head>
 
 <body>
-    <h1>Manage Articles</h1>
+    <h1>Product Management</h1>
 
-    <form id="articleForm">
-        <label for="titleRu">Title (RU):</label>
-        <input type="text" id="titleRu" name="titleRu" required>
+    <form id="productForm">
+        <!-- Name fields -->
+        <label for="nameRu">Name (RU):</label>
+        <input type="text" id="nameRu" name="nameRu" required>
 
-        <label for="titleEn">Title (EN):</label>
-        <input type="text" id="titleEn" name="titleEn" required>
+        <label for="nameEn">Name (EN):</label>
+        <input type="text" id="nameEn" name="nameEn" required>
 
-        <label for="titleUz">Title (UZ):</label>
-        <input type="text" id="titleUz" name="titleUz" required>
+        <label for="nameUz">Name (UZ):</label>
+        <input type="text" id="nameUz" name="nameUz" required>
 
+        <!-- Description fields -->
         <label for="descriptionRu">Description (RU):</label>
         <textarea id="descriptionRu" name="descriptionRu" required></textarea>
 
@@ -522,22 +629,38 @@
         <label for="descriptionUz">Description (UZ):</label>
         <textarea id="descriptionUz" name="descriptionUz" required></textarea>
 
+        <label for="category">Category:</label>
+        <select id="category" name="category" required>
+            <option value="">Select a Category</option>
+            <option value="Screens">Screens</option>
+            <option value="Compacting and Washing Equipments">Compacting and Washing Equipments</option>
+            <option value="Penstocks And Valves">Penstocks And Valves</option>
+            <option value="Scrapers">Scrapers</option>
+            <option value="Conveyors">Conveyors</option>
+            <option value="Agitators">Agitators</option>
+            <option value="Filters">Filters</option>
+            <option value="Lifting Device for Mixers and Small Pumps">Lifting Device for Mixers and Small Pumps</option>
+            <option value="Package Type Units">Package Type Units</option>
+            <option value="Other Manufacturing Items">Other Manufacturing Items</option>
+        </select>
 
-        <label for="publishDate">Publication Date:</label>
-        <input type="date" id="publishDate" name="publishDate" required>
+        <label for="subcategory">Subcategory:</label>
+        <select id="subcategory" name="subcategory" required>
+            <option value="">Please select a category first</option>
+        </select>
 
         <label for="image">Image:</label>
         <input type="file" id="image" name="image" required>
 
-        <button type="submit" id="saveButton">Save Article</button>
+        <button type="submit" id="saveButton">Save Product</button>
     </form>
 
     <div class="overlay" id="overlay"></div>
     <div class="loading" id="loading"></div>
 
-    <div class="articles-container" id="articles"></div>
+    <div class="products-container" id="products"></div>
 
-    <button class="product-button" onclick="window.location.href='admin_products.html'">Manage Products</button>
+    <button class="product-button" onclick="window.location.href='admin_pan.html'">Article Management</button>
 </body>
 
 </html>

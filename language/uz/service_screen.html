@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="uz">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loyihalar</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../styles/helper_styles.css">
+    <link rel="stylesheet" href="../../styles/styles.css">
+    <link rel="stylesheet" href="../../styles/footer_styles.css">
+    <link rel="stylesheet" href="../../styles/cutsom_header_styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="icon" type="image/svg+xml" href="../../img/main_screen/footer_logo.svg">
+
+</head>
+
+<body>
+
+    <div class="wrapper-content">
+        <header class="header" id="header">
+            <div class="container-custom">
+                <div class="d-flex justify-content-between align-items-center top-bar">
+                    <div class="logo">
+                        <a href="index_uz.html">
+                            <img id="logo-img" src="../../img/main_screen/header_logo.svg" alt="Logotip">
+                        </a>
+                    </div>
+                    <div class="d-flex flex-column align-items-end header-contact-blok">
+                        <div class="d-flex flex-column align-items-end header-contact-blok">
+                            <div class="d-flex align-items-center contact-info">
+                                <div class="d-flex align-items-center header-contact-info-hide">
+                                    <img src="../../img/main_screen/header_logo_phone.png" alt="Globus Ikon"
+                                        class="icon">
+                                    <span class="ml-2">+998 70-201-01-07</span>
+                                </div>
+                                <div class="dropdown d-flex align-items-center ml-3">
+                                    <img src="../../img/main_screen/header_logo_lan.png" alt="Globus Ikon"
+                                        class="icon dropdown-toggle">
+                                    <span class="ml-2" id="languageDropdown" data-toggle="dropdown" aria-haspopup="true"
+                                        aria-expanded="false">Uz</span>
+                                    <div class="dropdown-menu" aria-labelledby="languageDropdown">
+                                        <a class="dropdown-item" href="../../service_screen.html">Ru</a>
+                                        <a class="dropdown-item" href="service_screen.html">Uz</a>
+                                        <a class="dropdown-item" href="../en/service_screen.html">En</a>
+                                    </div>
+                                </div>
+                                <div class="contact-button ml-3 d-none d-lg-block">
+                                    <button class="btn btn-primary h-custom-button">Biz bilan bog'laning</button>
+                                </div>
+                                <button class="navbar-toggler ml-3" id="menu-button" type="button" data-toggle="modal"
+                                    data-target="#menuModal" aria-controls="menuModal" aria-expanded="false"
+                                    aria-label="Toggle navigation">
+                                    <span class="navbar-toggler-icon"></span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <nav class="navbar navbar-expand-lg navbar-light">
+
+                            <div class="collapse navbar-collapse" id="navbarNav">
+                                <ul class="navbar-nav ml-auto">
+                                    <li class="nav-item">
+                                        <a class="nav-link " href="index_uz.html">Bosh sahifa</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="about_company.html">Kompaniya haqida</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="products.html">Mahsulotlar</a>
+                                    </li>
+                                    <li class="nav-item active">
+                                        <a class="nav-link" href="service_screen.html">Loyihalar</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="blog_screen.html">Blog</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="contacts_screen.html">Aloqa</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Carousel Header -->
+
+        <div>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="../../img/service/backround_header.png" class="d-block" alt="...">
+                    <div class="carousel-caption d-md-block">
+                        <p class="breadcrumb">
+                            Bosh sahifa
+                            <img src="../../img/arrow_right.svg" alt="Arrow Icon" class="breadcrumb-icon">
+                            Loyihalar
+                        </p>
+                        <h5>Loyihalar</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Header -->
+
+        <div class="modal" id="menuModal" tabindex="-1" role="dialog" aria-labelledby="menuModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-fullscreen" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <nav class="navbar navbar-light">
+                            <ul class="navbar-nav modal-navbar-nav">
+                                <li class="nav-item">
+                                    <a class="nav-link modal-nav-link" href="index_uz.html">Bosh sahifa</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link modal-nav-link" href="about_company.html">Kompaniya haqida</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link modal-nav-link" href="products.html">Mahsulotlar</a>
+                                </li>
+
+                                <li class="nav-item active">
+                                    <a class="nav-link modal-nav-link" href="service_screen.html">Loyihalar</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link modal-nav-link" href="blog_screen.html">Blog</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link modal-nav-link" href="contacts_screen.html">Aloqa</a>
+                                </li>
+                                <div class="contact-button ml-3">
+                                    <button class="btn btn-primary h-custom-button">Biz bilan bog'laning</button>
+                                </div>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Uslugi -->
+
+        <div class="outer-wrapper-uslugi">
+            <div class="wrapper-uslugi">
+                <div class="services-title">
+                    <div class="highlight">Loyihalar</div>
+                    <div class="services-title-content">
+                        <div class="left">
+                            <p>Biz hamkorlik, mas'uliyat va barqaror rivojlanish kuchiga ishonamiz</p>
+                        </div>
+                        <div class="right">
+                            <p>Biz har bir tomchi suv samarali va oqilona ishlatiladigan, suv ta'minoti har bir kishi
+                                uchun mavjud bo'lib, hayot sifatini yaxshilashga hissa qo'shadigan dunyoni ko'ramiz.
+                                Bizning maqsadimiz — innovatsion echimlarni joriy etish va barcha loyihalarimizda eng
+                                yuqori sifat standartlarini ta'minlashdir.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="services-list">
+                    <div class="service-item">
+                        <img src="../../img/main_screen/Bekabad.jpg" alt="Bekobod">
+                        <div class="service-title">Bekobod</div>
+                        <div class="overlay">
+                            <h3>Ish jarayonida</h3>
+                        </div>
+                    </div>
+                    <div class="service-item">
+                        <img src="../../img/main_screen/Almalyk.jpg" alt="Olmaliq">
+                        <div class="service-title">Olmaliq</div>
+                        <div class="overlay">
+                            <h3>Ish jarayonida</h3>
+                        </div>
+                    </div>
+                    <div class="service-item">
+                        <img src="../../img/main_screen/Angren.jpg" alt="Angren">
+                        <div class="service-title">Angren</div>
+                        <div class="overlay">
+                            <h3>Ish jarayonida</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sizedbox-service-item"></div>
+
+                <div class="services-list">
+                    <div class="service-item">
+                        <img src="../../img/main_screen/Chirchik.jpg" alt="Chirchiq">
+                        <div class="service-title">Chirchiq</div>
+                        <div class="overlay">
+                            <h3>Ish jarayonida</h3>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Block news -->
+
+        <div class="outer-blog-wrapper">
+            <div class="blog-wrapper">
+                <div class="blog-header">
+                    <div class="highlight">Blog</div>
+                    <h1>So'nggi yangiliklar</h1>
+                    <div class="underline"></div>
+                </div>
+
+                <div class="blog-list" id="blog-list">
+                    <!-- Dynamic content will be inserted here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Block subscribe -->
+
+        <div class="outer-subscribe-wrapper">
+            <div class="subscribe-wrapper">
+                <div class="subscribe-text">
+                    Soha yangiliklari va ishlarimiz haqida ma'lumotlar uchun obuna bo'ling
+                </div>
+                <form class="subscribe-form">
+                    <input type="email" placeholder="Elektron pochta xabarini yuboring">
+                    <button type="submit">Obuna bo'lish</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Block map -->
+
+        <div class="map-container">
+            <div class="info-box">
+                <div class="info-header">Bizning ofislarimiz</div>
+                <h3>Bosh ofis va ishlab chiqarish maydonchasi</h3>
+                <div class="info-p">
+                    <p>Manzil: 100069, O'zbekiston, Toshkent viloyati, Yangiyo‘l shahri, Temuriy ko‘chasi, 15</p>
+                    <p>E-mail: info@mesal.uz</p>
+                    <p>Telefon: +998 70 201 01 07</p>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="footer-content">
+                <img src="../../img/main_screen/footer_logo.svg" alt="Logotip" class="logo">
+                <nav class="footer-nav">
+                    <a href="index_uz.html">Bosh sahifa</a>
+                    <a href="about_company.html">Kompaniya haqida</a>
+                    <a href="products.html">Mahsulotlar</a>
+                    <a href="service_screen.html">Loyihalar</a>
+                    <a href="blog_screen.html">Blog</a>
+                    <a href="contacts_screen.html">Aloqa</a>
+                </nav>
+            </div>
+            <div class="footer-bottom">
+                <p>Terms & Conditions &nbsp;|&nbsp; Privacy Policy &nbsp;|&nbsp; Sitemap &nbsp;|&nbsp; Employee login
+                </p>
+                <div class="social-links">
+                    <a href="#!"><img src="../../img/main_screen/footer_logo_link_fb.svg" alt="Facebook"></a>
+                    <a href="#!"><img src="../../img/main_screen/footer_logo_link_twit.svg" alt="Twitter"></a>
+                    <a href="#!"><img src="../../img/main_screen/footer_logo_link_git.svg" alt="GitHub"></a>
+                    <a href="#!"><img src="../../img/main_screen/footer_logo_link_d.svg" alt="Dribbble"></a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+
+    <div class="floating-buttons-top-right">
+        <button class="floating-button-rect search-button">
+            <img src="../../img/search_r_icon.svg" alt="Search Icon" class="icon-image">
+        </button>
+        <!-- <button class="floating-button-rect library-button">
+            <img src="../../img/biblioteka_r_icon.svg" alt="Library Icon" class="icon-image">
+        </button> -->
+    </div>
+
+    <div class="product-search modal fade" id="productSearchModal" tabindex="-1" role="dialog"
+        aria-labelledby="productSearchModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content product-search__content p-4">
+                <div class="modal-header product-search__header">
+                    <h5 class="modal-title" id="productSearchModalLabel">Mahsulotlar bo‘yicha qidiruv</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Закрыть">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body product-search__body">
+                    <input type="text" id="productSearchInput" class="form-control product-search__input"
+                        placeholder="Mahsulot nomini kiriting...">
+                    <div id="productSearchResults" class="product-search__results"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="contactModal" tabindex="-1" role="dialog" aria-labelledby="contactModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-fullscreen-custom" role="document">
+            <div class="modal-content">
+                <div id="backButton" class="back-button">
+                    <img src="../../img/products/back-modal.svg" alt="Orqaga">
+                    <span class="back-button-text">Orqaga</span>
+                </div>
+                <div class="contact-form-container contact-form-container-custom contact-form-container-custom-active">
+                    <h2>Biz bilan bog'laning</h2>
+                    <div class="underline"></div>
+                    <p class="description">Har bir ishga kompleks yondashish qanchalik muhimligini tushunamiz va oddiy
+                        va oson muloqotga ishonamiz.</p>
+                    <form class="contact-form" id="contactForm">
+                        <div class="row">
+                            <input type="text" id="name" placeholder="Ismingiz" required>
+                            <input type="email" id="email" placeholder="Email" required>
+                        </div>
+                        <div class="row">
+                            <input type="text" id="phone" placeholder="Telefon" required>
+                            <input type="text" id="company" placeholder="Kompaniya">
+                        </div>
+                        <div class="row">
+                            <textarea id="comment" placeholder="Sharh" required></textarea>
+                        </div>
+                        <button type="submit">Yuborish</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js";
+        import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAvzVROIUnoConplwk-8tpyz43Srg2qDso",
+            authDomain: "mesal-web-site.firebaseapp.com",
+            projectId: "mesal-web-site",
+            storageBucket: "mesal-web-site.appspot.com",
+            messagingSenderId: "648438491500",
+            appId: "1:648438491500:web:4d6326b259643259832b49"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        async function displayArticles(limit = null) {
+            const blogList = document.getElementById('blog-list');
+            blogList.innerHTML = '';
+
+            const querySnapshot = await getDocs(collection(db, "articles"));
+            let articles = [];
+            querySnapshot.forEach((doc) => {
+                articles.push(doc.data());
+            });
+
+            if (limit) {
+                articles = articles.slice(0, limit);
+            }
+
+            articles.forEach((article) => {
+                const blogItem = document.createElement('div');
+                blogItem.className = 'blog-item';
+                blogItem.innerHTML = `
+            <img src="${article.imageUrl}" alt="${article.titleUz}">
+            <div class="blog-content">
+                <div class="blog-meta">
+                    <div class="category">Kompaniya</div>
+                    <div class="date">${article.publishDate}</div>
+                </div>
+                <div class="blog-title">${article.titleUz}</div>
+                <div class="blog-description">${article.descriptionUz}</div>
+                <a href="#!" class="blog-read-more">Batafsil</a>
+            </div>
+        `;
+                blogList.appendChild(blogItem);
+            });
+        }
+
+        displayArticles(3);
+
+        let allProducts = [];
+
+        async function loadProductsForSearch() {
+            const querySnapshot = await getDocs(collection(db, "products"));
+            allProducts = querySnapshot.docs.map(doc => doc.data());
+        }
+
+        function createProductPreview(product) {
+            const item = document.createElement('div');
+            item.className = 'product-search__item';
+
+            item.innerHTML = `
+<img src="${product.imageUrl}" alt="${product.nameUz}" class="product-search__item-image">
+<div class="product-search__item-content">
+<div class="font-weight-bold">${product.nameUz}</div>
+<div class="text-muted small">${product.descriptionUz}</div>
+</div>
+`;
+
+            item.addEventListener('click', () => {
+                $('#productSearchModal').modal('hide');
+                openProductModal(product);
+            });
+
+            return item;
+        }
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            await loadProductsForSearch();
+
+            const input = document.getElementById('productSearchInput');
+            const resultsContainer = document.getElementById('productSearchResults');
+
+            input.addEventListener('input', (e) => {
+                const query = e.target.value.trim().toLowerCase();
+                resultsContainer.innerHTML = '';
+
+                if (query.length > 1) {
+                    const matched = allProducts.filter(p => p.nameUz.toLowerCase().includes(query));
+                    matched.forEach(p => resultsContainer.appendChild(createProductPreview(p)));
+                }
+            });
+
+            document.querySelector('.search-button').addEventListener('click', () => {
+                $('#productSearchModal').modal('show');
+                input.value = '';
+                resultsContainer.innerHTML = '';
+                setTimeout(() => input.focus(), 200);
+            });
+        });
+    </script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        $(window).scroll(function () {
+            if ($(this).scrollTop() > 50) {
+                $('#header').addClass('bg-white shadow');
+                $('#menu-button').addClass('hide-white-button');
+                $('#logo-img').attr('src', '../../img/main_screen/footer_logo.svg');
+                $('img[src="../../img/main_screen/header_logo_phone.png"]').attr('src', '../../img/main_screen/header_logo_phone-blue.png');
+                $('img[src="../../img/main_screen/header_logo_lan.png"]').attr('src', '../../img/main_screen/header_logo_lan-blue.png');
+                $('img[src="../../img/main_screen/header_search.png"]').attr('src', '../../img/main_screen/header_search-black.png');
+
+                $('.nav-item.active .nav-link').addClass('text-blue');
+            } else {
+                $('#header').removeClass('bg-white shadow');
+                $('#menu-button').removeClass('hide-white-button');
+                $('#logo-img').attr('src', '../../img/main_screen/header_logo.svg');
+                $('img[src="../../img/main_screen/header_logo_phone-blue.png"]').attr('src', '../../img/main_screen/header_logo_phone.png');
+                $('img[src="../../img/main_screen/header_logo_lan-blue.png"]').attr('src', '../../img/main_screen/header_logo_lan.png');
+                $('img[src="../../img/main_screen/header_search-black.png"]').attr('src', '../../img/main_screen/header_search.png');
+
+                $('.nav-item.active .nav-link').removeClass('text-blue');
+            }
+        });
+
+        $(document).ready(function () {
+            // Закрытие модального окна
+            $('#modalClose').on('click', function () {
+                $('#contactModal').modal('hide');
+            });
+
+            // Кнопка "Назад"
+            $('#backButton').on('click', function () {
+                $('#contactModal').modal('hide');
+            });
+
+            // Обработчик открытия модального окна
+            $('.h-custom-button').on('click', function () {
+                $('#contactModal').modal('show');
+            });
+        });
+    </script>
+    <script src="../../js/sendTelegram.js"></script>
+
+</body>
+
+</html>

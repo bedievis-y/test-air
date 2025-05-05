@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Вход</title>
+    <title>Login</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -26,9 +26,9 @@
         }
 
         .login-container {
-            width: 90%;
-            max-width: 600px;
-            padding: 5%;
+            width: 100%;
+            max-width: 400px;
+            padding: 40px;
             background-color: white;
             border: 1px solid #ccc;
             border-radius: 10px;
@@ -38,17 +38,17 @@
 
         .login-container h2 {
             margin-bottom: 20px;
-            font-size: 2em;
+            font-size: 24px;
             color: #333;
         }
 
         .login-container input {
-            width: 100%;
+            width: calc(100% - 30px);
             padding: 15px;
             margin: 10px 0;
             border: 1px solid #ccc;
             border-radius: 5px;
-            font-size: 1em;
+            font-size: 16px;
             box-sizing: border-box;
         }
 
@@ -59,7 +59,7 @@
             border-radius: 5px;
             background-color: #006BDC;
             color: white;
-            font-size: 1em;
+            font-size: 16px;
             cursor: pointer;
             margin-top: 10px;
             box-sizing: border-box;
@@ -72,37 +72,7 @@
         .error-message {
             color: red;
             margin-top: 10px;
-            font-size: 0.9em;
-        }
-
-        @media (min-width: 768px) {
-            .login-container {
-                padding: 40px;
-                border-radius: 15px;
-            }
-
-            .login-container h2 {
-                font-size: 2.5em;
-            }
-
-            .login-container input {
-                font-size: 1.1em;
-            }
-
-            .login-container button {
-                font-size: 1.1em;
-            }
-        }
-
-        @media (min-width: 1024px) {
-            .login-container {
-                padding: 50px;
-                border-radius: 20px;
-            }
-
-            .login-container h2 {
-                font-size: 3em;
-            }
+            font-size: 14px;
         }
     </style>
 </head>
@@ -110,47 +80,28 @@
 <body>
     <div class="login-wrapper">
         <div class="login-container">
-            <h2>Вход</h2>
+            <h2>Login</h2>
             <form id="login-form">
-                <input type="text" id="username" placeholder="Введите логин" required>
-                <input type="password" id="password" placeholder="Введите пароль" required>
-                <button type="submit">Войти</button>
+                <input type="text" id="username" placeholder="login" required>
+                <input type="password" id="password" placeholder="password" required>
+                <button type="submit">Sign In</button>
             </form>
             <p id="error-message" class="error-message"></p>
         </div>
     </div>
-
     <script>
-        const storedHashWithSalt = "16f36594f6bf014ca78914891c8e9e7780f722f11bba6e412fc1754d167f5f9b";
-
-        async function hashPasswordWithSalt(password) {
-            const salt = "random_salt_123";
-            const encoder = new TextEncoder();
-            const data = encoder.encode(password + salt);
-            const hashBuffer = await crypto.subtle.digest("SHA-256", data);
-            const hashArray = Array.from(new Uint8Array(hashBuffer));
-            return hashArray.map(byte => byte.toString(16).padStart(2, "0")).join("");
-        }
-
-        document.getElementById('login-form').addEventListener('submit', async function (event) {
+        document.getElementById('login-form').addEventListener('submit', function (event) {
             event.preventDefault();
 
             var username = document.getElementById('username').value;
             var password = document.getElementById('password').value;
             var errorMessage = document.getElementById('error-message');
 
-            if (username !== "airtechnic") {
-                errorMessage.textContent = "Неверный логин или пароль.";
-                return;
-            }
-
-            const hashedInput = await hashPasswordWithSalt(password);
-
-            if (hashedInput === storedHashWithSalt) {
-                localStorage.setItem("authenticated", "true");
-                window.location.href = "admin_pan.html";
+            if (username === 'mesal-admin' && password === 'mesal-123') {
+                localStorage.setItem('authenticated', 'true');
+                window.location.href = 'admin_pan.html';
             } else {
-                errorMessage.textContent = "Неверный логин или пароль.";
+                errorMessage.textContent = 'Invalid username or password. Please try again.';
             }
         });
     </script>

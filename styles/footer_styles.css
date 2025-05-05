@@ -1,0 +1,127 @@
+.footer {
+    background-color: #fff;
+    color: #333;
+    text-align: center;
+    padding: 100px;
+}
+
+.footer-content {
+    font-family: 'Cera Pro', sans-serif;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1520px;
+    margin: 0 auto 80px auto;
+}
+
+.footer-content img {
+    max-height: 200px;
+    height: auto;
+}
+
+.footer-nav a {
+    margin: 0 0 0 50px;
+    font-size: 20px;
+    color: #333;
+    text-decoration: none;
+}
+
+.footer-nav a:hover {
+    text-decoration: none;
+    opacity: 0.5;
+}
+
+.footer-bottom {
+    font-family: 'ProximaNova-reg', sans-serif;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1520px;
+    margin: 0 auto;
+}
+
+.footer-bottom p {
+    margin: 0;
+    font-size: 18px;
+    color: #999;
+}
+
+.social-links a {
+    margin: 0 10px;
+    display: inline-block;
+}
+
+.social-links img {
+    width: 24px;
+    height: 24px;
+}
+
+@media (max-width: 1500px) {
+    .footer {
+        padding: 50px;
+    }
+
+    .footer-nav a {
+        margin: 0 0 0 35px;
+    }
+}
+
+@media (max-width: 1200px) {
+    .footer-nav a {
+        font-size: 18px;
+        margin: 0 0 0 20px;
+    }
+
+    .footer-content img {
+        max-height: 65px;
+        height: auto;
+    }
+
+    .footer-bottom p{
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 992px) {
+    .footer {
+        padding: 20px;
+    }
+
+    .footer-content {
+        flex-direction: column;
+        align-items: center;
+        margin: 0 auto 30px auto;
+    }
+
+    .footer-content img {
+        display: none;
+    }
+
+    .footer-nav {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .footer-nav a {
+        margin: 10px 0;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .footer-bottom p {
+        margin-bottom: 10px;
+    }
+
+    .social-links {
+        margin-top: 10px;
+    }
+
+    .social-links a {
+        margin: 0 5px;
+    }
+}
