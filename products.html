@@ -394,10 +394,10 @@
 
             querySnapshot.forEach((doc) => {
                 const product = doc.data();
-                if (!categories[product.category]) {
-                    categories[product.category] = new Set();
+                if (!categories[product.categoryRu]) {
+                    categories[product.categoryRu] = new Set();
                 }
-                categories[product.category].add(product.subcategory);
+                categories[product.categoryRu].add(product.subcategoryRu);
             });
 
             for (const category in categories) {
@@ -447,7 +447,7 @@
             const contentProduct = document.getElementById('content-product');
             contentProduct.innerHTML = '';
 
-            const filteredProducts = productsData.filter(product => product.subcategory === currentSubcategory);
+            const filteredProducts = productsData.filter(product => product.subcategoryRu === currentSubcategory);
             const paginatedProducts = filteredProducts.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
 
             paginatedProducts.forEach(product => {

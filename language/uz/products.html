@@ -344,7 +344,6 @@
         let currentPage = 1;
         const itemsPerPage = 6;
         let initialContent = '';
-        let scrollPosition = 0;
 
         function showMainLoader(show) {
             const container = document.querySelector('.product-container');
@@ -416,10 +415,10 @@
 
             querySnapshot.forEach((doc) => {
                 const product = doc.data();
-                if (!categories[product.category]) {
-                    categories[product.category] = new Set();
+                if (!categories[product.categoryUz]) {
+                    categories[product.categoryUz] = new Set();
                 }
-                categories[product.category].add(product.subcategory);
+                categories[product.categoryUz].add(product.subcategoryUz);
             });
 
             for (const category in categories) {
@@ -469,7 +468,7 @@
             const contentProduct = document.getElementById('content-product');
             contentProduct.innerHTML = '';
 
-            const filteredProducts = productsData.filter(product => product.subcategory === currentSubcategory);
+            const filteredProducts = productsData.filter(product => product.subcategoryUz === currentSubcategory);
             const paginatedProducts = filteredProducts.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
 
             paginatedProducts.forEach(product => {

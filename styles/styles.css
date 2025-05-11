@@ -823,7 +823,7 @@ p {
 
 .product-container {
     display: flex;
-    justify-content: center;
+    /* justify-content: center; */
     margin: 100px auto 70px auto;
     padding: 0 100px;
     max-width: 1720px;
@@ -871,7 +871,7 @@ p {
 
 .content-product {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 20px;
 }
 
@@ -885,6 +885,7 @@ p {
     cursor: pointer;
     transition: opacity 0.3s ease-in-out;
     opacity: 1;
+    max-height: 450px;
 }
 
 .content-product .item-product:hover {
@@ -903,7 +904,7 @@ p {
     font-size: 18px;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-width: 300px;
+    max-width: 320px;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     font-family: 'Cera pro', sans-serif;
